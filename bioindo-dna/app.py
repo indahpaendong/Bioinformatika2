@@ -2,6 +2,38 @@ import streamlit as st
 
 st.title("Translasi DNA ke Protein")
 
+# Tambahkan CSS ke dalam HTML menggunakan markdown
+st.markdown("""
+    <style>
+    .main {
+        background-color: #f7fafd;
+        padding: 20px;
+        border-radius: 15px;
+    }
+    h1 {
+        color: #3a7bd5;
+        text-align: center;
+        font-size: 36px;
+    }
+    .stTextArea textarea {
+        font-family: 'Courier New', monospace;
+        font-size: 16px;
+        background-color: #f0f5ff;
+        border-radius: 8px;
+    }
+    .stTextInput input {
+        background-color: #f0f5ff;
+        border-radius: 8px;
+    }
+    .css-1d391kg {
+        font-weight: bold;
+        font-size: 20px;
+        color: #1a1a1a;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
+
 # Kamus kodon DNA → Asam amino
 codon_table = {
     'ATA':'I', 'ATC':'I', 'ATT':'I', 'ATG':'M',
