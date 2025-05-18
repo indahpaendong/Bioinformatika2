@@ -33,6 +33,8 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
+# Lanjutkan dengan input DNA
+dna_seq = st.text_area("Masukkan urutan DNA (harus kelipatan 3):", height=150)
 
 # Kamus kodon DNA → Asam amino
 codon_table = {
