@@ -1,8 +1,9 @@
 import streamlit as st
 
-st.title("Translasi DNA ke Protein")
+# Judul aplikasi
+st.title("🧬 Translasi DNA ke Protein")
 
-# Tambahkan CSS ke dalam HTML menggunakan markdown
+# Tambahkan styling CSS
 st.markdown("""
     <style>
     .main {
@@ -21,10 +22,6 @@ st.markdown("""
         background-color: #f0f5ff;
         border-radius: 8px;
     }
-    .stTextInput input {
-        background-color: #f0f5ff;
-        border-radius: 8px;
-    }
     .css-1d391kg {
         font-weight: bold;
         font-size: 20px;
@@ -33,10 +30,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# Lanjutkan dengan input DNA
-dna_seq = st.text_area("Masukkan urutan DNA (harus kelipatan 3):", height=150)
-
-# Kamus kodon DNA → Asam amino
+# Tabel kodon standar
 codon_table = {
     'ATA':'I', 'ATC':'I', 'ATT':'I', 'ATG':'M',
     'ACA':'T', 'ACC':'T', 'ACG':'T', 'ACT':'T',
@@ -56,18 +50,25 @@ codon_table = {
     'TGC':'C', 'TGT':'C', 'TGA':'_', 'TGG':'W',
 }
 
-dna_seq = st.text_area("Masukkan urutan DNA (harus kelipatan 3):", height=150)
+# Input DNA
+dna_seq = st.text_area("Masukkan urutan DNA (harus kelipatan 3):", key="dna_input", height=150)
 
-if dna_seq:
+# Tombol proses
+if st.button("Translasi"):
     dna_seq = dna_seq.upper().replace(" ", "").replace("\n", "")
-    protein = ""
     
     if len(dna_seq) % 3 != 0:
-        st.error("Panjang DNA harus kelipatan 3.")
+        st.error("❌ Panjang DNA harus kelipatan 3.")
     else:
+        protein = ""
         for i in range(0, len(dna_seq), 3):
             codon = dna_seq[i:i+3]
             amino_acid = codon_table.get(codon, "?")
             protein += amino_acid
-        st.success("Hasil translasi:")
-        st.code(protein)
+        
+        st.success("✅ Translasi Berhasil!")
+        st.markdown(f"**Urutan Protein:** `{protein}`")
+
+# Informasi tambahan
+st.markdown("---")
+st.info("Aplikasi ini dibuat untuk membantu translasi DNA menjadi protein berdasarkan tabel kodon standar genetik.")
